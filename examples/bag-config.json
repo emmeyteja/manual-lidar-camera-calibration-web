@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "reference_frame": "base_link",
+  "cameras": [{
+    "id": "camera",
+    "label": "Camera",
+    "frame": "camera_body",
+    "topic": "/camera/image/compressed",
+    "camera_mount": {"x": 0, "y": 0, "z": 1.5, "roll": 0, "pitch": 0, "yaw": 0},
+    "intrinsics": {"camera_model": "plumb_bob", "fx_fy_cx_cy": [500, 500, 400, 250], "distortion": [0, 0, 0, 0, 0]}
+  }],
+  "lidars": [{
+    "id": "lidar",
+    "label": "LiDAR",
+    "frame": "lidar",
+    "topic": "/lidar/points",
+    "mount": {"x": 0, "y": 0, "z": 0, "roll": 0, "pitch": 0, "yaw": 0}
+  }]
+}

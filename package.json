@@ -1,0 +1,13 @@
+{
+  "name": "manual-lidar-camera-calibration-web-dev",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/ui.test.cjs",
+    "format:check": "prettier --check 'src/manual_calibration/static/*' 'tests/*.cjs'",
+    "format": "prettier --write 'src/manual_calibration/static/*' 'tests/*.cjs'"
+  },
+  "devDependencies": {
+    "jsdom": "^26.1.0",
+    "prettier": "^3.6.2"
+  }
+}

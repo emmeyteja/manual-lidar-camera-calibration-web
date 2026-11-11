@@ -1,0 +1,4 @@
+include package.json package-lock.json
+recursive-include examples *.json
+recursive-include tests *.cjs
+recursive-include docs *.jpg

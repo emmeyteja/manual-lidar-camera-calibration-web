@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="calibration-token" content="__SESSION_TOKEN__" />
+    <title>Manual LiDAR–camera calibration</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Manual LiDAR–camera calibration</h1>
+      <p>
+        Adjust the camera pose against fixed LiDAR mounts. Inspect several
+        frames before saving.
+      </p>
+    </header>
+    <main>
+      <section class="controls" aria-label="Calibration controls">
+        <label for="recording">Recording</label>
+        <select id="recording"></select>
+        <label for="camera">Camera</label>
+        <select id="camera"></select>
+        <p id="reference"></p>
+        <div id="axes"></div>
+        <button id="reset">Reset to baseline</button>
+        <div class="row">
+          <button id="download">Download values</button>
+          <button id="load">Load values</button>
+          <input id="file" type="file" accept=".json,application/json" hidden />
+        </div>
+        <details>
+          <summary>Camera lens</summary>
+          <p>
+            Use intrinsics calibrated for this image resolution and image
+            pipeline. Projection includes distortion; the image itself is not
+            dewarped.
+          </p>
+          <label for="model">Projection model</label>
+          <select id="model">
+            <option value="plumb_bob">plumb_bob — 5 coefficients</option>
+            <option value="fisheye">
+              Fisheye / equidistant — 4 coefficients
+            </option>
+          </select>
+          <label for="focal">fx, fy, cx, cy</label>
+          <input id="focal" type="text" />
+          <label for="distortion">Distortion coefficients</label>
+          <input id="distortion" type="text" />
+          <p id="lensHelp"></p>
+          <button id="resetLens">Restore baseline lens</button>
+        </details>
+        <h2>Point display</h2>
+        <label for="opacity">Opacity</label>
+        <input
+          id="opacity"
+          type="range"
+          min="0"
+          max="1"
+          step="0.05"
+          value="0.78"
+        />
+        <label for="spacing">Point spacing</label>
+        <select id="spacing">
+          <option value="2">Dense</option>
+          <option value="4" selected>Balanced</option>
+          <option value="6">Sparse</option>
+          <option value="10">Very sparse</option>
+        </select>
+        <button id="video">Export MP4</button>
+        <p id="job" role="status"></p>
+        <details>
+          <summary>Coordinate conventions</summary>
+          <p>
+            XYZ: metres. Roll, pitch, yaw: degrees, fixed-axis XYZ (Rz × Ry ×
+            Rx). Mounts map sensor body coordinates into the project reference
+            frame.
+          </p>
+          <p>
+            Optical axes: x right, y down, z forward. LiDAR mounts remain fixed.
+            Downloads include both transform directions.
+          </p>
+        </details>
+        <p class="note">
+          Edits stay in this page until downloaded. Original images, point
+          clouds, calibration files and ROS transforms are never modified.
+        </p>
+      </section>
+      <section class="preview" aria-label="Projection preview">
+        <div class="row">
+          <label for="mode">Compare</label>
+          <select id="mode">
+            <option value="original_overlay">Original image / overlay</option>
+            <option value="recorded_adjusted">Baseline / edited overlay</option>
+            <option value="overlay_only">Overlay only</option>
+          </select>
+          <label for="width">Detail</label>
+          <select id="width">
+            <option value="960">Standard</option>
+            <option value="1440">High</option>
+          </select>
+          <button id="saveImage">Save image</button>
+        </div>
+        <p id="status" role="status">Loading project…</p>
+        <p id="error" role="alert"></p>
+        <img id="image" alt="Camera image with projected LiDAR points" />
+        <div class="row">
+          <button id="back" aria-keyshortcuts="P">Previous</button>
+          <button id="play" aria-keyshortcuts="Space">Play</button>
+          <button id="next" aria-keyshortcuts="N">Next</button>
+          <button id="last">Last frame</button>
+          <span id="time"></span>
+        </div>
+        <input
+          id="timeline"
+          type="range"
+          min="0"
+          max="0"
+          value="0"
+          step="1"
+          aria-label="Frame"
+        />
+        <p class="note">
+          Space: play/pause · P: previous · N: next. Shortcuts pause while
+          editing fields.
+        </p>
+        <p class="note">
+          Point colour encodes depth: blue ≈ 1 m, green ≈ 25 m, red ≥ 50 m.
+          Timing offsets are displayed; no motion compensation is applied.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

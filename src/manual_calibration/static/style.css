@@ -1,0 +1,161 @@
+:root {
+  color-scheme: dark;
+  font-family: system-ui, sans-serif;
+  background: #151719;
+  color: #eee;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+header {
+  padding: 18px 24px;
+  border-bottom: 1px solid #393e45;
+}
+h1 {
+  font-size: 22px;
+  margin: 0 0 8px;
+}
+h2 {
+  font-size: 16px;
+  margin-top: 24px;
+}
+p {
+  font-size: 13px;
+  line-height: 1.55;
+  color: #bec5cc;
+  overflow-wrap: anywhere;
+}
+main {
+  display: grid;
+  grid-template-columns: 325px minmax(0, 1fr);
+  gap: 24px;
+  padding: 20px 24px;
+}
+.controls {
+  padding-right: 20px;
+  border-right: 1px solid #393e45;
+}
+.controls > label,
+details > label {
+  display: block;
+  margin: 14px 0 6px;
+  font-size: 13px;
+}
+.controls > select,
+details > input,
+details > select {
+  width: 100%;
+}
+button,
+select,
+input {
+  font: inherit;
+}
+button,
+select,
+input[type="number"],
+input[type="text"] {
+  background: #272b30;
+  color: #eee;
+  border: 1px solid #525960;
+  border-radius: 5px;
+  padding: 7px;
+}
+button {
+  cursor: pointer;
+}
+button:hover {
+  background: #363d45;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid #8bbaff;
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+}
+.axis {
+  margin: 16px 0;
+}
+.axis-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.axis input[type="number"] {
+  width: 135px;
+  text-align: right;
+}
+input[type="range"] {
+  width: 100%;
+  accent-color: #7daff7;
+}
+.axis small {
+  display: block;
+  color: #aab3bd;
+  margin-top: 4px;
+}
+details {
+  margin: 18px 0;
+  font-size: 13px;
+}
+summary {
+  cursor: pointer;
+}
+.preview {
+  min-width: 0;
+}
+#image {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: #202327;
+}
+#image:not([src]) {
+  min-height: 220px;
+}
+#status {
+  min-height: 24px;
+  color: #b8cce5;
+}
+#error {
+  color: #ffb5b5;
+  white-space: pre-wrap;
+}
+#time {
+  font-variant-numeric: tabular-nums;
+  font-size: 13px;
+}
+.note {
+  font-size: 12px;
+}
+a {
+  color: #9dc5ff;
+}
+@media (max-width: 900px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+  .controls {
+    border: 0;
+    padding: 0;
+  }
+  #axes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 16px;
+  }
+}
